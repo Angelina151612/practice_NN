@@ -26,6 +26,7 @@ def r_square(y_true, y_pred):
     SS_tot = K.sum(K.square(y_true - K.mean(y_true))) 
     return (1 - SS_res/SS_tot)
 
+
 n1=7
 n2=5
 optsStr=['SGD','Nadam','RMSprop'] 
@@ -33,37 +34,34 @@ num_model =13
 opt = 1
 speed = 0.0003
 
-#загрузка лучших весов
+# загрузка лучших весов
 W = load_model(r'weight/BPopt_'+ optsStr[opt]+'/№' + str(n1)+'_'+str(n2)+'_'+str(speed)+'/' + str(num_model)+'/'+'BP_'+ str(n1)+'_'+str(n2)+'_' + str(num_model)+'.h5', custom_objects={'r_square': r_square})
 w_0,w_0b= W.layers[0].get_weights()
-
 #np.savetxt("weight/BPopt_Nadam/weight_13_end.csv", np.round(w_0,2),fmt = '% 1.2f', delimiter=",")
 
-
-#загрузка лучших весов
+# загрузка лучших весов
 Wi = load_model(r'weight/BPopt_'+ optsStr[opt]+'/№' + str(n1)+'_'+str(n2)+'_'+str(speed)+'/' + str(num_model)+'/'+'initBP_'+ str(n1)+'_'+str(n2)+'_' + str(num_model)+'.h5', custom_objects={'r_square': r_square})
 w_i0,w_i0b= Wi.layers[0].get_weights()
 #np.savetxt("weight/BPopt_Nadam/weight_13_init.csv", np.round(w_i0,2), fmt = '% 1.2f',delimiter=",")
 
-#разница весов
+# разница весов
 #print(np.round(w_0-w_i0,2))
 
-'''
-#гистограмма begin
+
+# гистограмма begin
 w_i0 = pd.Series(w_i0.flatten())
 ax_end = w_i0.hist(bins=20)  
 ax_end.set_title('Архитектура 7_5, модель ' +  str(num_model)+', начальное распределение весов')
 plt.show()
 
-#гистограмма end
+#г истограмма end
 w_0 = pd.Series(w_0.flatten())
 ax_end = w_0.hist(bins=20)  
 ax_end.set_title('Архитектура 7_5, модель ' +  str(num_model)+', конечное распределение весов')
 plt.show()
-'''
 
 
-
+#функция для получения весов на конкретных эпохах
 def get_weight(num_epoch):
     W = load_model(r'weight/BPopt_'+ optsStr[opt]+'/№' + str(n1)+'_'+str(n2)+'_'+str(speed)+'/' + str(num_model)+'/'+'checkBP_'+ str(n1)+'_'+str(n2)+'_' + str(num_model)+'_'+str(num_epoch)+'.h5', custom_objects={'r_square': r_square})
     w_0,w_0b= W.layers[0].get_weights()
@@ -99,7 +97,8 @@ for i in s:
     weight_change_3.append(w[ind3,ind33])
     weight_change_4.append(w[ind4,ind44])
     weight_change_5.append(w[ind5,ind55])
-    
+
+# лучшая эпоха
 x=375
 
 def print_weight(i,j,weights):

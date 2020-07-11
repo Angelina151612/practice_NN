@@ -1,24 +1,10 @@
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
-import time
 import tensorflow as tf
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
-from tensorflow.keras import models
-from tensorflow.keras import layers
-#from tensorflow.keras.layers import advanced_activations
-from tensorflow.keras.callbacks import CSVLogger
-from tensorflow.keras import optimizers
-#from keras import regularizers
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-import os
-from tensorflow.keras import initializers as initi
 from tensorflow.keras import backend as K
-from tensorflow.keras import callbacks as cb
-from scipy import stats as st
 from tensorflow.keras.models import load_model
-import datetime
 
 
 def r_square(y_true, y_pred):
